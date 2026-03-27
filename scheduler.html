@@ -16,8 +16,8 @@
           box-shadow: 0 1px 2px rgba(0,0,0,0.10);
         }
     body {
-      background: #F6F8FA url('EMTECH3/components/PlanWise.png') no-repeat center center fixed;
-      background-image: url('EMTECH3/components/PlanWise.png');
+      background: #F6F8FA url('components/PlanWise.png') no-repeat center center fixed;
+      background-image: url('components/PlanWise.png');
       background-size: 480px auto;
       font-family: 'Montserrat', Arial, sans-serif;
       margin: 0;
@@ -232,7 +232,7 @@
 <body>
   <div class="container">
     <div class="main-panel">
-      <div class="logo"><img src="EMTECH3/components/PlanWise.png" alt="PlanWise Logo" style="height:80px;vertical-align:middle;"> <span style="vertical-align:middle;font-size:32px;font-weight:700;margin-left:10px;">PlanWise</span></div>
+      <div class="logo"><img src="components/PlanWise.png" alt="PlanWise Logo" style="height:80px;vertical-align:middle;"> <span style="vertical-align:middle;font-size:32px;font-weight:700;margin-left:10px;">PlanWise</span></div>
       <div class="subtitle">Schedule your events</div>
       <div class="calendar" id="calendar"></div>
       <form class="event-form" id="event-form">
@@ -252,6 +252,37 @@
             <option value="#F6F8FA"></option>
           </datalist>
         </div>
+        <div style="display:flex;align-items:center;margin-bottom:10px;gap:10px;">
+          <input type="text" id="event-location" placeholder="Pick location or use geolocation" style="flex:1;" />
+          <button type="button" id="geo-btn" title="Use my location" style="padding:8px 14px;font-size:14px;background:#2D6A4F;color:#fff;border:none;border-radius:8px;cursor:pointer;">📍</button>
+          <button type="button" id="map-btn" title="Pick on map" style="padding:8px 14px;font-size:14px;background:#4285F4;color:#fff;border:none;border-radius:8px;cursor:pointer;">🗺️</button>
+        </div>
+        <!-- Offline Google Maps Modal -->
+        <div id="map-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.35);z-index:1000;align-items:center;justify-content:center;">
+          <div style="background:#fff;padding:18px 18px 8px 18px;border-radius:16px;max-width:95vw;max-height:90vh;box-shadow:0 4px 32px rgba(0,0,0,0.18);display:flex;flex-direction:column;align-items:center;">
+            <div style="width:350px;height:350px;max-width:80vw;max-height:60vw;display:flex;align-items:center;justify-content:center;">
+              <div id="gmap" style="width:100%;height:100%;border-radius:12px;"></div>
+            </div>
+            <button id="close-map" style="margin:12px 0 0 0;padding:8px 24px;font-size:15px;background:#e74c3c;color:#fff;border:none;border-radius:8px;cursor:pointer;">Close</button>
+          </div>
+                // Offline Google Maps Picker fallback
+                function showMapModal() {
+                  const modal = document.getElementById('map-modal');
+                  modal.style.display = 'flex';
+                  // Show offline message instead of map
+                  const gmap = document.getElementById('gmap');
+                  gmap.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;width:100%;color:#e74c3c;font-size:18px;text-align:center;"><span style="font-size:40px;">&#9888;</span><b>Offline Mode</b><br>Map picker is unavailable offline.<br><br><span style="font-size:14px;color:#444;">Enter coordinates manually or use geolocation.</span></div>';
+                }
+                function hideMapModal() {
+                  document.getElementById('map-modal').style.display = 'none';
+                }
+                document.addEventListener('DOMContentLoaded', function() {
+                  const mapBtn = document.getElementById('map-btn');
+                  const closeMap = document.getElementById('close-map');
+                  if (mapBtn) mapBtn.onclick = showMapModal;
+                  if (closeMap) closeMap.onclick = hideMapModal;
+                });
+        </div>
         <textarea id="event-desc" placeholder="Event Description" rows="2"></textarea>
         <button type="submit">Add Event</button>
       </form>
@@ -265,27 +296,27 @@
     <h2 style="font-size:20px;font-weight:700;color:#2D6A4F;margin-top:0;margin-bottom:18px;letter-spacing:1px;">Meet the PlanWise Team</h2>
     <div style="display:flex;flex-wrap:wrap;gap:28px;justify-content:center;align-items:flex-start;">
       <div style="display:flex;flex-direction:column;align-items:center;width:140px;">
-        <img src="EMTECH3/components/Royce.png" alt="Agbisit, Rolcydiel" style="width:150px;height:150px;object-fit:cover;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:8px;">
+        <img src="components/Royce.png" alt="Agbisit, Rolcydiel" style="width:150px;height:150px;object-fit:cover;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:8px;">
         <div style="font-weight:600;color:#2D6A4F;font-size:15px;">Agbisit, Rolcydiel</div>
         <div style="font-size:13px;color:#444;text-align:center;">Project Manager</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;width:140px;">
-        <img src="EMTECH3/components/Ayden.jpeg" alt="Calabines, Ayden Jarrick" style="width:150px;height:150px;object-fit:cover;object-position:center top;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:8px;">
+        <img src="components/Ayden.jpeg" alt="Calabines, Ayden Jarrick" style="width:150px;height:150px;object-fit:cover;object-position:center top;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:8px;">
         <div style="font-weight:600;color:#2D6A4F;font-size:15px;">Calabines, Ayden Jarrick</div>
         <div style="font-size:13px;color:#444;text-align:center;">Developer</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;width:140px;">
-        <img src="EMTECH3/components/Christian.jpg" alt="Calatraba, Kelvin Christian" style="width:150px;height:150px;object-fit:cover;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:8px;">
+        <img src="components/Christian.jpg" alt="Calatraba, Kelvin Christian" style="width:150px;height:150px;object-fit:cover;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:8px;">
         <div style="font-weight:600;color:#2D6A4F;font-size:15px;">Calatraba, Kelvin Christian</div>
         <div style="font-size:13px;color:#444;text-align:center;">UI/UX Designer</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;width:140px;">
-        <img src="EMTECH3/components/sydnew.png" alt="Echiverry, Syd Ashley" style="width:150px;height:150px;object-fit:cover;object-position:center top;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:8px;">
+        <img src="components/sydnew.png" alt="Echiverry, Syd Ashley" style="width:150px;height:150px;object-fit:cover;object-position:center top;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:8px;">
         <div style="font-weight:600;color:#2D6A4F;font-size:15px;">Echiverry, Syd Ashley</div>
         <div style="font-size:13px;color:#444;text-align:center;">Back-End Support</div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:center;width:140px;">
-        <img src="EMTECH3/components/JP.png" alt="Santos, John Paul" style="width:150px;height:150px;object-fit:cover;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:8px;">
+        <img src="components/JP.png" alt="Santos, John Paul" style="width:150px;height:150px;object-fit:cover;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-bottom:8px;">
         <div style="font-weight:600;color:#2D6A4F;font-size:15px;">Santos, John Paul</div>
         <div style="font-size:13px;color:#444;text-align:center;">Quality Assurance Tester</div>
       </div>
@@ -293,7 +324,7 @@
   </div>
   <div style="width:100%;display:flex;justify-content:center;margin:24px 0 0 0;">
     <div style="background:#fff;border-radius:50%;box-shadow:0 4px 32px rgba(0,0,0,0.13);padding:32px;display:flex;align-items:center;justify-content:center;">
-      <img src="EMTECH3/components/PlanWise.png" alt="PlanWise Logo" style="height:180px;width:180px;max-width:90vw;max-height:30vw;object-fit:contain;display:block;">
+      <img src="components/PlanWise.png" alt="PlanWise Logo" style="height:180px;width:180px;max-width:90vw;max-height:30vw;object-fit:contain;display:block;">
     </div>
   </div>
   <div class="about-section" style="max-width:420px;margin:32px auto 0 auto;background:#fff;border-radius:18px;box-shadow:0 2px 12px rgba(0,0,0,0.06);padding:28px 22px 22px 22px;animation:popInForm 0.7s cubic-bezier(.4,0,.2,1);">
@@ -302,6 +333,32 @@
     <p style="font-size:15px;color:#6B7280;margin-bottom:0;">Made with ❤️ by the PlanWise Team.</p>
   </div>
   <script>
+        // Geolocation logic
+        document.addEventListener('DOMContentLoaded', function() {
+          const geoBtn = document.getElementById('geo-btn');
+          const locInput = document.getElementById('event-location');
+          if (geoBtn && locInput) {
+            geoBtn.addEventListener('click', function() {
+              if (!navigator.geolocation) {
+                alert('Geolocation is not supported by your browser.');
+                return;
+              }
+              geoBtn.disabled = true;
+              geoBtn.textContent = 'Locating...';
+              navigator.geolocation.getCurrentPosition(function(position) {
+                const lat = position.coords.latitude.toFixed(6);
+                const lng = position.coords.longitude.toFixed(6);
+                locInput.value = `Lat: ${lat}, Lng: ${lng}`;
+                geoBtn.textContent = '📍';
+                geoBtn.disabled = false;
+              }, function() {
+                alert('Unable to retrieve your location.');
+                geoBtn.textContent = '📍';
+                geoBtn.disabled = false;
+              });
+            });
+          }
+        });
     // Calendar logic
     const calendarEl = document.getElementById('calendar');
     const eventForm = document.getElementById('event-form');
