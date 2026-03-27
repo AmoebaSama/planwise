@@ -1,11 +1,10 @@
-// This file was moved from EMTECH3/EMTECH3 to EMTECH3 for correct Webpack config resolution.
 const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: path.resolve(__dirname, 'EMTECH3/index.web.js'),
+  entry: path.resolve(__dirname, 'index.web.js'),
   output: {
-    path: path.resolve(__dirname, 'EMTECH3/dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     publicPath: '/',
   },
@@ -41,10 +40,10 @@ module.exports = {
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, 'EMTECH3/public'),
+      directory: path.join(__dirname, 'public'),
     },
     compress: true,
-    port: 3003,
+    port: 3000,
     historyApiFallback: true,
   },
   mode: 'development',

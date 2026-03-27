@@ -1,0 +1,18 @@
+{
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "types": ["jest", "react", "react-dom", "react-native", "react-native-web"],
+    "baseUrl": ".",
+    "paths": {
+      "react-native$": ["node_modules/react-native-web"],
+      "react-native": ["node_modules/react-native-web"],
+      "@/*": ["./*"],
+      "*": ["node_modules/*"]
+    },
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  },
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
+  "exclude": ["**/node_modules", "**/Pods"]
+}
