@@ -265,23 +265,6 @@
             </div>
             <button id="close-map" style="margin:12px 0 0 0;padding:8px 24px;font-size:15px;background:#e74c3c;color:#fff;border:none;border-radius:8px;cursor:pointer;">Close</button>
           </div>
-                // Offline Google Maps Picker fallback
-                function showMapModal() {
-                  const modal = document.getElementById('map-modal');
-                  modal.style.display = 'flex';
-                  // Show offline message instead of map
-                  const gmap = document.getElementById('gmap');
-                  gmap.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;width:100%;color:#e74c3c;font-size:18px;text-align:center;"><span style="font-size:40px;">&#9888;</span><b>Offline Mode</b><br>Map picker is unavailable offline.<br><br><span style="font-size:14px;color:#444;">Enter coordinates manually or use geolocation.</span></div>';
-                }
-                function hideMapModal() {
-                  document.getElementById('map-modal').style.display = 'none';
-                }
-                document.addEventListener('DOMContentLoaded', function() {
-                  const mapBtn = document.getElementById('map-btn');
-                  const closeMap = document.getElementById('close-map');
-                  if (mapBtn) mapBtn.onclick = showMapModal;
-                  if (closeMap) closeMap.onclick = hideMapModal;
-                });
         </div>
         <textarea id="event-desc" placeholder="Event Description" rows="2"></textarea>
         <button type="submit">Add Event</button>
@@ -333,6 +316,22 @@
     <p style="font-size:15px;color:#6B7280;margin-bottom:0;">Made with ❤️ by the PlanWise Team.</p>
   </div>
   <script>
+        // Map modal logic
+        function showMapModal() {
+          const modal = document.getElementById('map-modal');
+          modal.style.display = 'flex';
+          const gmap = document.getElementById('gmap');
+          gmap.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;width:100%;color:#e74c3c;font-size:18px;text-align:center;"><span style="font-size:40px;">&#9888;</span><b>Offline Mode</b><br>Map picker is unavailable offline.<br><br><span style="font-size:14px;color:#444;">Enter coordinates manually or use geolocation.</span></div>';
+        }
+        function hideMapModal() {
+          document.getElementById('map-modal').style.display = 'none';
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+          const mapBtn = document.getElementById('map-btn');
+          const closeMap = document.getElementById('close-map');
+          if (mapBtn) mapBtn.onclick = showMapModal;
+          if (closeMap) closeMap.onclick = hideMapModal;
+        });
         // Geolocation logic
         document.addEventListener('DOMContentLoaded', function() {
           const geoBtn = document.getElementById('geo-btn');
